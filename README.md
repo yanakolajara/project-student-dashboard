@@ -28,7 +28,7 @@ There are no tests as part of this project. Instead, focus on making sure featur
 
 This project includes some existing code which will help you complete the features below.
 
-- [`src/data/data.json`](./src/data/data.json): This contains data for over 200 students. Each student multiple properties associated with them. Some important ones include:
+- [`src/data/data.json`](./src/data/data.json): This contains data for over 200 students. Each student has multiple properties associated with them. Some important ones include:
   - `id`: A unique ID associated with each student.
   - `profilePhoto`: A randomly generated photo from [fakerface.rest](https://fakerface.rest).
   - `cohort`: An object represent which "cohort" the student is in.
