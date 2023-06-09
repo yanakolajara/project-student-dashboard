@@ -1,5 +1,4 @@
-import data from './data/data.json'
-import {cohortStudents} from './helper.js'
+import {students,cohortStudents} from './helper.js'
 
 function App() {
   return (
@@ -22,10 +21,9 @@ function App() {
         </aside>
 
         <main>
-          <h2 class="cohortSelected">All students</h2> //! Change textNode when cohort is selected
-          <p class="totalStudents" value={() => {}}>Total students: {}</p> //! Change value when cohort is selected
-
-          // * Student structure
+          <h2 class="cohortSelected">All students</h2>
+          <p class="totalStudents" value={() => {}}>Total students: {}</p>
+          {students()}
           <div class="studentCard">
             <img class="studentImg"></img>
             <div class="studentInfo">
@@ -33,11 +31,6 @@ function App() {
               <p class="studentDOB"></p>
               <p class="studentEmail"></p>
               <button>Show more...</button> 
-              // todo: create additional student details function (and css animation)
-              // todo: change button's state when button is clicked
-              //* Include Codewars, scores (%), and certifications (check or x icons)
-              //? codeWars percentage color: 100: green, 50-100 yellow, 0-50 red.
-              //? codeWars emoji depending on percentage range as the one above
             </div>
           </div>
         </main>
