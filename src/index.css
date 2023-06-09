@@ -1,0 +1,12 @@
+header{
+    height: 90px;
+    font-size: 2em;
+    border: 2px solid red;
+    padding-left: 50px;
+    padding-top: 15px;
+    background: blue;
+}
+
+header h1{
+    margin: 0px;
+}

@@ -4,7 +4,9 @@ import {cohorts} from './helper.js'
 function App() {
   return (
     <div>
-      <h1>Student Dashboard</h1>
+      <header>
+        <h1>Student Dashboard</h1>
+      </header>
 
       <aside class="cohorts">
         <h2>Choose a class by start date</h2>
@@ -42,6 +44,7 @@ function App() {
       </main>
       <asside class="notes">
         <form>
+          //! Use bootstrap: https://getbootstrap.com/docs/5.3/forms/input-group/
           //* Input: Commenter name 
           //* Input: Comment 
           //* Submit: Add note 
