@@ -1,12 +1,31 @@
+body{
+    display: grid;
+}
+
 header{
     height: 90px;
     font-size: 2em;
-    border: 2px solid red;
+    border: 2px solid rgb(217, 255, 0);
     padding-left: 50px;
     padding-top: 15px;
-    background: blue;
+    background: rgb(251, 0, 255);
 }
 
 header h1{
     margin: 0px;
+}
+
+.mainContent{
+    display: grid;
+    grid-template-columns: 20% 50% 30%;
+}
+
+.cohorts{
+    border: 2px solid red;
+}
+main{
+    border: 2px solid green
+}
+.notes {
+    border: 2px solid blue;
 }
