@@ -1,5 +1,5 @@
 import data from './data/data.json'
-import {cohorts} from './helper.js'
+import {cohortStudents} from './helper.js'
 
 function App() {
   return (
@@ -11,15 +11,14 @@ function App() {
       <div class="mainContent">
         <aside class="cohorts">
           <h2>Choose a class by start date</h2>
-          //! Add :hover to cohortDiv's
           <div class="cohortDiv">
-            <h3>All Students</h3>
+            <h4>All Students</h4>
             //todo add function that filters students in x cohort
             <hr/>
           </div>
           // todo Use structure from last cohort
           // todo cohorts should be from the last court to the first court
-          {cohorts()}
+          {cohortStudents()}
         </aside>
 
         <main>
