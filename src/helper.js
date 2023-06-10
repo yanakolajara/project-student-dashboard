@@ -3,14 +3,19 @@ import StudentCard from './studentCard.js'
 
 export const students = () => {
     const studentList = data.map((student) => {
-        return <studentCard
+        return <StudentCard
             name = {student.names}
             img = {student.profilePhoto}
             dob = {student.dob}
             email = {student.username}/>
     })
+
+    console.log(studentList)
     return(
-        <p>Hello</p>
+        <>
+            <p>TEST</p>
+            {studentList}
+        </>
     )
 }
 
