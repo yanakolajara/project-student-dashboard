@@ -1,42 +1,135 @@
+/** ---General----- */
 body{
     display: grid;
+    font-family: 'MyCustomFont';
+    background-image: url('./data/Sprinkle.svg');
+    color: white;
+    text-shadow: 2px 2px black;
 }
-
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('./fonts/Comfortaa-Medium.ttf') format('truetype');
+}
+hr{
+    margin: 0px;
+}
+/** ---Title----- */
 header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 90px;
-    font-size: 2em;
     padding-left: 50px;
     padding-top: 15px;
-    background: rgb(251, 0, 255);
+    background: rgb(28, 95, 202);
     margin: 0px 0px 30px;
+    box-shadow: 2px 0px 50px black;
 }
 
 header h1{
-    margin: 0px;
+    font-size: 4em;
 }
+
+/** ---Main content-----*/
 
 .mainContent{
     display: grid;
     grid-template-columns: 20% 50% 30%;
 }
 
+/** ---Cohort selector-----*/
 .cohorts{
+    background-color: rgb(44, 105, 204);
+    border-radius: 0px 10px;
+    padding-top: 20px;
+    padding-left: 10px;
     display: inline-block;
     justify-content: center;
-    border: 2px solid red;
+    box-shadow: 2px -2px 5px black;
 }
 .cohorts h2{
-    padding-bottom: 40px;
+    padding-bottom: 20px;
 }
 .cohortDiv :hover{
-    background-color: rgb(232, 232, 232);
+    color: rgb(255, 0, 0);
+    cursor: pointer;
+}
+.cohortDiv h4{
+    margin: 10px 0px 0px 10px;
 }
 
+/** ---Student list-----*/
 main{
-    border: 2px solid green;
-    padding: 20px 30px 0px 30px;
+    padding: 20px 10px 0px 10px;
 }
 
-.notes {
-    border: 2px solid blue;
+.cohortSelected{
+    font-size: 3em;
+    margin-left: 10px;
 }
+.totalStudents{
+    margin-left: 15px;
+}
+.studentCard {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    background-color:  rgb(53, 122, 246);
+    box-shadow: 2px 2px 2px black;
+    /*! CHANGE BORDER*/
+    border-radius: 25px;
+    padding: 5px 15px 5px 5px;
+    margin-bottom: 15px;
+}
+.studentText{
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+.studentImg{
+    border-radius: 25px;
+    margin-right: 10px;
+    border: 2px solid black
+}
+.studentName {
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+.studentEmail,
+.studentDOB{
+    font-size: 1.5em;
+    margin-left: 10px;
+    margin-bottom: 0px
+}
+.studentInfo button{
+    margin-top: 5px;
+    margin-left: 35%;
+    border-radius: 10px;
+    border: 1px solid rgb(200, 200, 200);
+}
+/** ---Student Notes-----*/
+.notes {
+    background-color: rgb(44, 105, 204);
+    border-radius: 15px 0px;
+    box-shadow: -2px -2px 5px black;
+    padding: 20px 15px 0px 15px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(57, 133, 255);
+    padding: 30px 10px;
+    border-radius: 20px;
+    box-shadow: -1px -1px 10px black;
+}
+
+#commenterName,
+#comment{
+    border-radius: 10px;
+}
+#commentSubmit{
+    margin-top: 30px;
+    border-radius: 10px;
+}
+
