@@ -1,3 +1,5 @@
+import {moreInfo} from './helper.js'
+
 const StudentCard = (props) => {
     const {name,img,dob,email} = props;
     return(
@@ -11,7 +13,7 @@ const StudentCard = (props) => {
                 <hr/>
                 <u class="studentText">Username</u>
                 <p class="studentEmail">{email}</p>
-                <button>Show more...</button> 
+                <button onClick={(event) => moreInfo(event.target.parentNode)}>Show more...</button> 
             </div>
         </div>
     )
