@@ -148,3 +148,12 @@ form{
 .infoTitle {
     font-size: 2em;
 }
+.greenScore{
+    color: green;
+}
+.yellowScore{
+    color:yellow
+}
+.redScore{
+    color: red
+}

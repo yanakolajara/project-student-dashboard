@@ -141,6 +141,18 @@ export const moreInfo = (student) => {
         scores.setAttribute('class', 'scores')
         const scoreTitle = document.createElement('p')
         scoreTitle.setAttribute('class', 'infoTitle')
+        scoreTitle.appendChild(document.createTextNode('Scores: '))
+        scores.appendChild(scoreTitle)
+        const assignmentsScore = document.createElement('p')
+        if(studentObj.cohort.scores.assignments <= .49){
+            assignmentsScore.setAttribute('class', 'redScore')
+        }else if(studentObj.cohort.scores.assignments >= .50 && studentObj.cohort.scores.assignments <= .99){
+            assignmentsScore.setAttribute('class', 'yellowScore')
+        }else{
+            assignmentsScore.setAttribute('class', 'greenScore')
+        }
+        assignmentsScore.appendChild(document.createTextNode(`Assignments: ${studentObj.cohort.scores.assignments * 100}%`))
+        scores.appendChild(assignmentsScore)
         // Assignments: 32%
         // Projects: 45%
         // Assessments: 67%
@@ -153,15 +165,12 @@ export const moreInfo = (student) => {
         //* General info div -----------------------
         infoDiv.setAttribute('class', 'infoDiv')
         infoDiv.appendChild(codeWars)   
+        infoDiv.appendChild(scores)
         student.parentNode.appendChild(infoDiv)
     }else{
         document.querySelector('.infoDiv').remove()
         student.querySelector('button').innerHTML = 'Show more...'
     }
-    //todo change button textNode
-    //todo Add logic to button textNode (if more/if less)
-    //? Include Codewars, scores (%), and certifications (check or x icons)
-    //todo codeWars percentage color: 100: green, 50-100 yellow, 0-50 red.
     //todo codeWars emoji depending on percentage range as the one above
 }
 
