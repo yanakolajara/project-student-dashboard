@@ -8,7 +8,9 @@ export const students = () => {
             name = {student.names}
             img = {student.profilePhoto}
             dob = {student.dob}
-            email = {student.username}/>
+            email = {student.username}
+            certifications = {student.certifications}
+            codewars = {student.codewars}/>
     })
     const totalStudents = <p class="totalStudents">Total students: {studentList.length}</p>
     return(
@@ -23,7 +25,6 @@ export const cohortCount = () => {
     const studentCount = document.querySelector('main').children.length - 2
     return studentCount;
 }
-
 
 export const cohortStudents = (cohort) => {
     document.querySelector('.cohortSelected').innerText = cohort.innerText;
@@ -46,6 +47,7 @@ export const cohortStudents = (cohort) => {
     const studentList = arrayOfStudents.forEach((student) => {
         const studentImg = document.createElement('img')
         const studentName = document.createElement('p')
+        const graduateTrack = document.createElement('p')
         const studentDOB = document.createElement('p')
         const studentEmail = document.createElement('p')
         const text1 = document.createElement('u')
@@ -53,13 +55,18 @@ export const cohortStudents = (cohort) => {
         const line = document.createElement('hr')
         const button = document.createElement('button')
         studentCount += 1
-
+        
         //* Student Image
         studentImg.setAttribute('class', 'studentImg')
         studentImg.setAttribute('src', `${student.profilePhoto}`)
         //* Student Name
         studentName.setAttribute('class', 'studentName')
         studentName.appendChild(document.createTextNode(`${student.names.preferredName} ${student.names.middleName[0]}. ${student.names.surname}`))
+        //* Student graduate track
+        graduateTrack.setAttribute('class', 'graduateTrack')
+        if(student.certifications.resume && student.certifications.linkedin && student.certifications.github && student.certifications.mockInterview && student.codewars.current.total > 600){
+            graduateTrack.appendChild(document.createTextNode('On Track to Graduate'))
+        }
         //* Student DOB
         studentDOB.setAttribute('class', 'studentDOB')
         studentDOB.appendChild(document.createTextNode(`${student.dob}`))
@@ -79,6 +86,7 @@ export const cohortStudents = (cohort) => {
         const studentInfo = document.createElement('div')
         studentInfo.setAttribute('class', 'studentInfo')
         studentInfo.appendChild(studentName)
+        studentInfo.appendChild(graduateTrack)
         studentInfo.appendChild(line)
         studentInfo.appendChild(text1)
         studentInfo.appendChild(studentDOB)
@@ -103,10 +111,56 @@ export const cohortStudents = (cohort) => {
 
 //! FINISH
 export const moreInfo = (student) => {
-    console.log(student)
+    const studentObj = data.filter((x) => x.username === student.querySelector('.studentEmail').innerText)[0]
+    console.log(studentObj)
+    //TODO: Find student with email and create an element for it
+    if(student.querySelector('button').innerText === 'Show more...'){
+        student.querySelector('button').innerHTML = 'Show less'
+        const infoDiv = document.createElement('div')
+        const codeWars = document.createElement('div')
+        const scores = document.createElement('div')
+        const certifications = document.createElement('div')
+
+        //* Codewars ----------------------
+        codeWars.setAttribute('class', 'codeWars')
+        const codeWarsTitle = document.createElement('p')
+        codeWarsTitle.setAttribute('class', 'infoTitle')
+        codeWarsTitle.appendChild(document.createTextNode('Codewars: '))
+        codeWars.appendChild(codeWarsTitle)
+        const codeWarsCurrentTotal = document.createElement('p')
+        codeWarsCurrentTotal.appendChild(document.createTextNode(`Current total: ${studentObj.codewars.current.total}`))
+        codeWars.appendChild(codeWarsCurrentTotal)
+        const codeWarsLastWeek = document.createElement('p')
+        codeWarsLastWeek.appendChild(document.createTextNode(`Last week: ${studentObj.codewars.current.lastWeek}`))
+        codeWars.appendChild(codeWarsLastWeek)
+        const codeWarsGoal = document.createElement('p')
+        codeWarsGoal.appendChild(document.createTextNode(`Goal: ${studentObj.codewars.goal.total}`))
+        codeWars.appendChild(codeWarsGoal)
+        //* Scores ----------------------
+        //? Green: 100^ Yellow: 50 - 99 Red: 49<
+        scores.setAttribute('class', 'scores')
+        const scoreTitle = document.createElement('p')
+        scoreTitle.setAttribute('class', 'infoTitle')
+        // Assignments: 32%
+        // Projects: 45%
+        // Assessments: 67%
+        //* Certifications ----------------------
+        // todo: if/else score is more than: change div type
+        // Resume: check
+        // Linkedin: x mark
+        // Mock interview: check
+        // Github: x mark
+        //* General info div -----------------------
+        infoDiv.setAttribute('class', 'infoDiv')
+        infoDiv.appendChild(codeWars)   
+        student.parentNode.appendChild(infoDiv)
+    }else{
+        document.querySelector('.infoDiv').remove()
+        student.querySelector('button').innerHTML = 'Show more...'
+    }
     //todo change button textNode
-    //todo Add logic to button textNode
-    //* Include Codewars, scores (%), and certifications (check or x icons)
+    //todo Add logic to button textNode (if more/if less)
+    //? Include Codewars, scores (%), and certifications (check or x icons)
     //todo codeWars percentage color: 100: green, 50-100 yellow, 0-50 red.
     //todo codeWars emoji depending on percentage range as the one above
 }
