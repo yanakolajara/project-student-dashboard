@@ -10,7 +10,8 @@ export const students = () => {
             dob = {student.dob}
             email = {student.username}
             certifications = {student.certifications}
-            codewars = {student.codewars}/>
+            codewars = {student.codewars}
+            id = {student.id}/>
     })
     const totalStudents = <p class="totalStudents">Total students: {studentList.length}</p>
     return(
@@ -28,85 +29,27 @@ export const cohortCount = () => {
 
 export const cohortStudents = (cohort) => {
     document.querySelector('.cohortSelected').innerText = cohort.innerText;
-    let arrayOfStudents = []
+    const allStudents = document.querySelector('.allStudents').children
     let studentCount = 0
-    if(cohort.innerText === 'All Students'){
-        arrayOfStudents = data
-    }else{
-        arrayOfStudents = data.filter((student) => cohort.innerText.split(' ').join('') === student.cohort.cohortCode)
-    }
-    const allStudentsDiv = document.querySelector('.allStudents')
-    allStudentsDiv.innerHTML = ''
-
-    //* Total students
-    const totalStudents = document.createElement('p')
-    totalStudents.setAttribute('class', 'totalStudents')
-    totalStudents.appendChild(document.createTextNode(`Total students: ${arrayOfStudents.length}`))
-    allStudentsDiv.appendChild(totalStudents)
-
-    const studentList = arrayOfStudents.forEach((student) => {
-        const studentImg = document.createElement('img')
-        const studentName = document.createElement('p')
-        const graduateTrack = document.createElement('p')
-        const studentDOB = document.createElement('p')
-        const studentEmail = document.createElement('p')
-        const text1 = document.createElement('u')
-        const text2 = document.createElement('u')
-        const line = document.createElement('hr')
-        const button = document.createElement('button')
-        studentCount += 1
-        
-        //* Student Image
-        studentImg.setAttribute('class', 'studentImg')
-        studentImg.setAttribute('src', `${student.profilePhoto}`)
-        //* Student Name
-        studentName.setAttribute('class', 'studentName')
-        studentName.appendChild(document.createTextNode(`${student.names.preferredName} ${student.names.middleName[0]}. ${student.names.surname}`))
-        //* Student graduate track
-        graduateTrack.setAttribute('class', 'graduateTrack')
-        if(student.certifications.resume && student.certifications.linkedin && student.certifications.github && student.certifications.mockInterview && student.codewars.current.total > 600){
-            graduateTrack.appendChild(document.createTextNode('On Track to Graduate'))
+    console.log(cohort.innerText)
+    for(let x of allStudents){
+        if(x.innerText.split(' ')[0] !== "Total"){
+            const email = x.children[1].children[7].innerText
+            const studentInData = data.find((studentData) => studentData.username === email)
+            const studentCourt = studentInData.cohort.cohortCode
+            const studentId = studentInData.id
+            if(cohort.innerHTML === "All Students"){
+                document.getElementById(studentId).style.display = ""
+                studentCount += 1
+            }else if(cohort.innerText.split(' ').join('') !== studentCourt){
+                document.getElementById(studentId).style.display = "none"
+            }else{
+                document.getElementById(studentId).style.display = ""
+                studentCount += 1
+            }
         }
-        //* Student DOB
-        studentDOB.setAttribute('class', 'studentDOB')
-        studentDOB.appendChild(document.createTextNode(`${student.dob}`))
-        //* Student email
-        studentEmail.setAttribute('class', 'studentEmail')
-        studentEmail.appendChild(document.createTextNode(`${student.email}`))
-        //* Student more info button
-        button.setAttribute('onClick', '{(event) => moreInfo(event.target.parentNode)')
-        button.appendChild(document.createTextNode('Show more...'))
-        //* Student text 1
-        text1.setAttribute('class', 'studentText')
-        text1.appendChild(document.createTextNode('Date of birth'))
-        //* Student text 2
-        text2.setAttribute('class', 'studentText')
-        text2.appendChild(document.createTextNode('Username'))
-        //* Student info div
-        const studentInfo = document.createElement('div')
-        studentInfo.setAttribute('class', 'studentInfo')
-        studentInfo.appendChild(studentName)
-        studentInfo.appendChild(graduateTrack)
-        studentInfo.appendChild(line)
-        studentInfo.appendChild(text1)
-        studentInfo.appendChild(studentDOB)
-        studentInfo.appendChild(line)
-        studentInfo.appendChild(text2)
-        studentInfo.appendChild(studentEmail)
-        studentInfo.appendChild(button)
-        //* Student card
-        const studentCard = document.createElement('div')
-        studentCard.setAttribute('class', 'studentCard')
-        studentCard.appendChild(studentImg)
-        studentCard.appendChild(studentInfo)
-
-        allStudentsDiv.appendChild(studentCard)
-    })
-
-
-
-    //todo add function that filters students in x cohort
-    //todo Change main's title textNode when cohort is selected
+    }
+    document.querySelector(".totalStudents").innerHTML = `Total students: ${studentCount}`
 }
 
 //! FINISH
@@ -153,11 +96,30 @@ export const moreInfo = (student) => {
         }
         assignmentsScore.appendChild(document.createTextNode(`Assignments: ${studentObj.cohort.scores.assignments * 100}%`))
         scores.appendChild(assignmentsScore)
-        // Assignments: 32%
+        const projectsScore = document.createElement('p')
+        if(studentObj.cohort.scores.projects <= .49){
+            projectsScore.setAttribute('class', 'redScore')
+        }else if(studentObj.cohort.scores.projects >= .50 && studentObj.cohort.scores.projects <= .99){
+            projectsScore.setAttribute('class', 'yellowScore')
+        }else{
+            projectsScore.setAttribute('class', 'greenScore')
+        }
+        projectsScore.appendChild(document.createTextNode(`Projects: ${studentObj.cohort.scores.projects * 100}%`))
+        scores.appendChild(projectsScore)
+        const assessmentsScore = document.createElement('p')
+        if(studentObj.cohort.scores.assessments <= .49){
+            projectsScore.setAttribute('class', 'redScore')
+        }else if(studentObj.cohort.scores.assessments >= .50 && studentObj.cohort.scores.assessments <= .99){
+            assessmentsScore.setAttribute('class', 'yellowScore')
+        }else{
+            assessmentsScore.setAttribute('class', 'greenScore')
+        }
+        assessmentsScore.appendChild(document.createTextNode(`Assessments: ${studentObj.cohort.scores.assessments * 100}%`))
+        scores.appendChild(assessmentsScore)
+        // todo: if/else score is more than: change div type
         // Projects: 45%
         // Assessments: 67%
         //* Certifications ----------------------
-        // todo: if/else score is more than: change div type
         // Resume: check
         // Linkedin: x mark
         // Mock interview: check

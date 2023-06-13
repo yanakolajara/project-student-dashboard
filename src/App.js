@@ -4,7 +4,6 @@ import {moreInfo,students,cohortStudents,cohortCount,addNote} from './helper.js'
 function App() {
   const [commenter, setCommenter] = useState('')
   const [comment, setComment] = useState('')
-
   return (
     <div>
       <header>
