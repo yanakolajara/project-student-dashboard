@@ -22,11 +22,6 @@ export const students = () => {
     )
 }
 
-export const cohortCount = () => {
-    const studentCount = document.querySelector('main').children.length - 2
-    return studentCount;
-}
-
 export const cohortStudents = (cohort) => {
     document.querySelector('.cohortSelected').innerText = cohort.innerText;
     const allStudents = document.querySelector('.allStudents').children

@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {moreInfo,students,cohortStudents,cohortCount,addNote} from './helper.js'
+import {moreInfo,students,cohortStudents,addNote} from './helper.js'
 
 function App() {
   const [commenter, setCommenter] = useState('')
