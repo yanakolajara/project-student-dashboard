@@ -142,8 +142,7 @@ form{
 .infoDiv {
     grid-column: 1/3;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    border: 2px dotted pink;
+    grid-template-columns: 2fr 1.5fr 1.5fr;
 }
 .infoTitle {
     font-size: 2em;
@@ -156,4 +155,15 @@ form{
 }
 .redScore{
     color: red
+}
+
+.checkicon{
+    background-image: url('./data/checkmark.png');
+    width: 10px;
+    height: 10px;
+}
+.xicon{
+    background-image: url('./data/xicon.png');
+    width: 10px;
+    height: 10px;
 }

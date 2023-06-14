@@ -26,7 +26,6 @@ export const cohortStudents = (cohort) => {
     document.querySelector('.cohortSelected').innerText = cohort.innerText;
     const allStudents = document.querySelector('.allStudents').children
     let studentCount = 0
-    console.log(cohort.innerText)
     for(let x of allStudents){
         if(x.innerText.split(' ')[0] !== "Total"){
             const email = x.children[1].children[7].innerText
@@ -50,8 +49,6 @@ export const cohortStudents = (cohort) => {
 //! FINISH
 export const moreInfo = (student) => {
     const studentObj = data.filter((x) => x.username === student.querySelector('.studentEmail').innerText)[0]
-    console.log(studentObj)
-    //TODO: Find student with email and create an element for it
     if(student.querySelector('button').innerText === 'Show more...'){
         student.querySelector('button').innerHTML = 'Show less'
         const infoDiv = document.createElement('div')
@@ -74,6 +71,9 @@ export const moreInfo = (student) => {
         const codeWarsGoal = document.createElement('p')
         codeWarsGoal.appendChild(document.createTextNode(`Goal: ${studentObj.codewars.goal.total}`))
         codeWars.appendChild(codeWarsGoal)
+        const goalPercent = document.createElement('p')
+        goalPercent.appendChild(document.createTextNode(`Percent of goal achieved: ${Math.floor((studentObj.codewars.current.total / studentObj.codewars.goal.total) * 100)}%`))
+        codeWars.appendChild(goalPercent)
         //* Scores ----------------------
         //? Green: 100^ Yellow: 50 - 99 Red: 49<
         scores.setAttribute('class', 'scores')
@@ -111,18 +111,45 @@ export const moreInfo = (student) => {
         }
         assessmentsScore.appendChild(document.createTextNode(`Assessments: ${studentObj.cohort.scores.assessments * 100}%`))
         scores.appendChild(assessmentsScore)
-        // todo: if/else score is more than: change div type
-        // Projects: 45%
-        // Assessments: 67%
         //* Certifications ----------------------
-        // Resume: check
-        // Linkedin: x mark
-        // Mock interview: check
-        // Github: x mark
+        certifications.setAttribute('class', 'certifications')
+        const certificationsTitle = document.createElement('p')
+        certificationsTitle.setAttribute('class', 'infoTitle')
+        certificationsTitle.appendChild(document.createTextNode('Certifications:'))
+        certifications.appendChild(certificationsTitle)
+        const resumeText = document.createElement('p')
+        if(studentObj.certifications.resume){
+            resumeText.appendChild(document.createTextNode('Resume ✅'))
+        }else{
+            resumeText.appendChild(document.createTextNode('Resume ❌'))
+        }
+        certifications.appendChild(resumeText)
+        const linkedinText = document.createElement('p')
+        if(studentObj.certifications.linkedin){
+            linkedinText.appendChild(document.createTextNode('Linkedin ✅'))
+        }else{
+            linkedinText.appendChild(document.createTextNode('Linkedin ❌'))
+        }
+        certifications.appendChild(linkedinText)
+        const mockInterviewText = document.createElement('p')
+        if(studentObj.certifications.mockInterview){
+            mockInterviewText.appendChild(document.createTextNode('Mock interview ✅'))
+        }else{
+            mockInterviewText.appendChild(document.createTextNode('Mock interview ❌'))
+        }
+        certifications.appendChild(mockInterviewText)
+        const githubText = document.createElement('p')
+        if(studentObj.certifications.github){
+            githubText.appendChild(document.createTextNode('Github ✅'))
+        }else{
+            githubText.appendChild(document.createTextNode('Github ❌'))
+        }
+        certifications.appendChild(githubText)
         //* General info div -----------------------
         infoDiv.setAttribute('class', 'infoDiv')
         infoDiv.appendChild(codeWars)   
         infoDiv.appendChild(scores)
+        infoDiv.appendChild(certifications)
         student.parentNode.appendChild(infoDiv)
     }else{
         document.querySelector('.infoDiv').remove()
